@@ -23,6 +23,15 @@ export class AppController {
     const logs2 = await this.appService.runInCommandLine(
       `videogrep --input static/${id}/${id}.mp4 --search "${body.clipSearch}" -o ./static/${id}/${id}-clip.mp4`,
     );
+
+    setTimeout(async () => {
+      console.log('delete video ' + body.videoUrl);
+      console.log(`delete 'static/${id}/${id}.mp4'`);
+      const res = await this.appService.runInCommandLine(
+          `rm -rf static/${id}`,
+      );
+    }, 300_000)
+
     console.log("done")
     return {
       crop: `http://localhost:3000/download/${id}/${id}-clip.mp4`,
