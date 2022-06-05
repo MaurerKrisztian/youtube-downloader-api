@@ -34,8 +34,9 @@ export class AppController {
 
     console.log("done")
     return {
-      crop: `http://localhost:3000/download/${id}/${id}-clip.mp4`,
-      download: `http://localhost:3000/download/${id}/${id}.mp4`,
+      baseUrl: `http://localhost:3088/`, // todo
+      crop: `/download/${id}/${id}-clip.mp4`,
+      download: `/download/${id}/${id}.mp4`,
       logs: logs,
     };
   }
