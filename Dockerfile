@@ -4,6 +4,8 @@ COPY package*.json ./
 
 RUN npm ci
 COPY . .
+RUN npm install
+RUN npm install webpack
 RUN npm run prebuild && npm run build && npm prune --production
 
 FROM  ubuntu:18.04 as server
