@@ -2,7 +2,7 @@ FROM node:14.19-alpine as builder
 WORKDIR /opt/app/
 COPY package*.json ./
 
-#RUN npm ci
+RUN npm ci
 COPY . .
 RUN npm run prebuild && npm run build && npm prune --production
 
