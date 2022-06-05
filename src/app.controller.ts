@@ -7,7 +7,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post()
-  async crop(@Body() body: { videoUrl: string; clipSearch: string }) {
+  async crop(@Body() body: { videoUrl: string; clipSearch: string, type: 'sentence' | 'fragment'}) {
     const id = uuidv4();
 
     console.log('download video ' + body.videoUrl);
@@ -15,13 +15,13 @@ export class AppController {
       `yt-dlp "${body.videoUrl}" --write-auto-sub --sub-lang en -f 22 -o static/${id}/${id}.mp4`,
     );
 
-    const logs3 = await this.appService.runInCommandLine(
-      `youtube-dl --write-auto-sub --write-sub --sub-lang hu --convert-subs srt --skip-download "${body.videoUrl}" -o static/${id}/${id}.hu.vtt`,
-    );
+    // const logs3 = await this.appService.runInCommandLine(
+    //   `youtube-dl --write-auto-sub --write-sub --sub-lang hu --convert-subs srt --skip-download "${body.videoUrl}" -o static/${id}/${id}.hu.vtt`,
+    // ); // todo all lang
 
     console.log('cut video, serch ' + body.clipSearch);
     const logs2 = await this.appService.runInCommandLine(
-      `videogrep --input static/${id}/${id}.mp4 --search "${body.clipSearch}" -o ./static/${id}/${id}-clip.mp4`,
+      `videogrep --input static/${id}/${id}.mp4 --search "${body.clipSearch}" --search-type ${body?.type || 'fragment'} -o ./static/${id}/${id}-clip.mp4`,
     );
 
     setTimeout(async () => {

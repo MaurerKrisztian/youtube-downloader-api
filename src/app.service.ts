@@ -10,6 +10,7 @@ export class AppService {
 
   runInCommandLine(command: string) {
     return new Promise(async (resolve, reject) => {
+      console.log("RUN COMMAND: " + command);
       await exec(command, (error, stdout, stderr) => {
         if (error) {
           console.log(`error: ${error.message}`);
