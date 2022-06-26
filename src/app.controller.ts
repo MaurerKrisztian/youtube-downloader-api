@@ -1,10 +1,11 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { v4 as uuidv4 } from 'uuid';
+import {YtDownloaderWrapper} from "./yt-downloader-wrapper";
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService,private readonly ytDownloaderWrapper:YtDownloaderWrapper) {}
 
   @Post()
   async crop(@Body() body: { videoUrl: string; clipSearch: string, type: 'sentence' | 'fragment'}) {
@@ -15,14 +16,8 @@ export class AppController {
       `yt-dlp "${body.videoUrl}" --write-auto-sub --sub-lang en -f 22 -o static/${id}/${id}.mp4`,
     );
 
-    // const logs3 = await this.appService.runInCommandLine(
-    //   `youtube-dl --write-auto-sub --write-sub --sub-lang hu --convert-subs srt --skip-download "${body.videoUrl}" -o static/${id}/${id}.hu.vtt`,
-    // ); // todo all lang
+    this.ytDownloaderWrapper.process(body.videoUrl, `static/${id}/`, id, 'mp4');
 
-    console.log('cut video, serch ' + body.clipSearch);
-    const logs2 = await this.appService.runInCommandLine(
-      `videogrep --input static/${id}/${id}.mp4 --search "${body.clipSearch}" --search-type ${body?.type || 'fragment'} -o ./static/${id}/${id}-clip.mp4`,
-    );
 
     setTimeout(async () => {
       console.log('delete video ' + body.videoUrl);
