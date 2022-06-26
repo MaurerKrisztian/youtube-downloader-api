@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {exec} from "child_process";
 
 export class DownloadService {
-    async crop(body: { videoUrl: string }) {
+    static async download(body: { videoUrl: string }) {
         const ytDownloaderWrapper = new YtDownloaderWrapper()
         const id = uuidv4();
 
