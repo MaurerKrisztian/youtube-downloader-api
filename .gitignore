@@ -1,2 +1,6 @@
-static
+node_modules
 .env
+.idea
+coverage
+package-lock.json
+build

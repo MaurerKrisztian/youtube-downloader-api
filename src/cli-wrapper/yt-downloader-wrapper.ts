@@ -1,4 +1,3 @@
-import {Injectable, Logger} from "@nestjs/common";
 import {spawn} from "child_process";
 import {EventEmitter} from "events";
 
@@ -11,9 +10,7 @@ export interface IProgressObject {
     meta?: {pid: number, customId: string}
 }
 
-@Injectable()
 export class YtDownloaderWrapper {
-    private readonly logger = new Logger(YtDownloaderWrapper.name);
 
     static DownloadEvent = new EventEmitter();
     static EventNames = {
@@ -62,7 +59,7 @@ export class YtDownloaderWrapper {
         return progressObject
     }
 
-    process(link: string, path: string='./download', filename:string = "video", format: 'mp4' = 'mp4') {
+    process(link: string, id:string, path: string='./download', filename:string = "video", format: 'mp4' = 'mp4') {
         YtDownloaderWrapper.DownloadEvent.emit(YtDownloaderWrapper.EventNames.START, link)
 
         const ytDlpProcess = spawn('yt-dlp', [link, '-P', path, '-o', `${filename}`, '-f', format]);
@@ -77,7 +74,7 @@ export class YtDownloaderWrapper {
         ytDlpProcess.stderr.on(
             'data',
             (data) => {
-                this.logger.error(data);
+                console.error(data);
             }
         );
         ytDlpProcess.on('error', (error) => {
