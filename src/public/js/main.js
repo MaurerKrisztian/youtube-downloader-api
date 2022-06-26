@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io('http://localhost:3000');
 
 const input = document.getElementById('link');
 const button = document.getElementById('send')

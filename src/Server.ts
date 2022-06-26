@@ -4,6 +4,9 @@ import {SocketService} from "./services/socketServices/SocketService";
 
 const socketio = require('socket.io');
 const path = require('path');
+const cors = require('cors')
+
+const http = require('http');
 
 export class Server {
     static io: any;
@@ -13,9 +16,16 @@ export class Server {
 
     static createApp() {
         const app = express();
-        const http = require('http');
+
+        app.use(cors())
         const server = http.createServer(app)
-        Server.io = socketio(server);
+        Server.io = socketio(server,  {
+            cors: {
+                origin: "*",
+                methods: ["GET", "POST"]
+            }
+        });
+
 
         app.use(bodyParser.json());
         app.use(express.static(path.join(__dirname, 'public')));
