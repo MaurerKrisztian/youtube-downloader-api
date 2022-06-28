@@ -6,7 +6,7 @@ MyLogger.logger.level = "trace"
 
 const server = Server.createApp();
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3088;
 server.listen(PORT, () => {
     MyLogger.debug("App listening on port " + PORT);
 });
