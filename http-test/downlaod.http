@@ -1,6 +1,0 @@
-POST http://localhost:3088/
-Content-Type: application/json
-
-{ "videoUrl": "https://youtu.be/8oUiOj-PJIU", "clipSearch": "string", "type": "sentence"}
-
-###
