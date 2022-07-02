@@ -22,7 +22,7 @@ export class DownloadService {
 
         console.log("done")
         return {
-            baseUrl: `http://localhost:3088/`, // todo
+            baseUrl: `https://test.mytaskplan.me/`, // todo from env
             crop: `/download/${id}/${id}-clip.mp4`,
             download: `/download/${id}/${id}.mp4`,
         };
