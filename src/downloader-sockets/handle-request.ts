@@ -17,7 +17,7 @@ export class HandleRequest {
             })
             YtDownloaderWrapper.DownloadEvent.on(YtDownloaderWrapper.EventNames.DONE, (data) => {
                 console.log("done", data)
-                socket.emit('download-done', {link: `http://localhost:3000/${data.id}/${data.id}`, pid: data.pid} )
+                socket.emit('download-done', {link: `https://test.mytaskplan.me/${data.id}/${data.id}`, pid: data.pid} ) // todo from env
             })
             YtDownloaderWrapper.DownloadEvent.on(YtDownloaderWrapper.EventNames.ERROR, (data) => {
                 console.log("error", data)
