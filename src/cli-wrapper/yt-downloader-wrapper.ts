@@ -1,4 +1,4 @@
-import {spawn} from "child_process";
+import {ChildProcessWithoutNullStreams, spawn} from "child_process";
 import {EventEmitter} from "events";
 
 export interface IProgressObject {
@@ -7,7 +7,7 @@ export interface IProgressObject {
     currentSpeed: string,
     eta: string,
 
-    meta?: {pid: number, customId: string}
+    meta?: { pid: number, customId: string }
 }
 
 export class YtDownloaderWrapper {
@@ -53,16 +53,24 @@ export class YtDownloaderWrapper {
             );
             progressObject.currentSpeed = progressMatch[4];
             progressObject.eta = progressMatch[6];
-            YtDownloaderWrapper.DownloadEvent.emit(YtDownloaderWrapper.EventNames.PROGRESS, {...progressObject, meta: {pid}})
+            YtDownloaderWrapper.DownloadEvent.emit(YtDownloaderWrapper.EventNames.PROGRESS, {
+                ...progressObject,
+                meta: {pid}
+            })
         }
 
         return progressObject
     }
 
-    process(link: string, id:string, path: string='./download', filename:string = "video", format: 'mp4' | 'mp3' = 'mp4') {
+    process(link: string, id: string, path: string = './download', filename: string = "video", format: 'mp4' | 'mp3' = 'mp4') {
         YtDownloaderWrapper.DownloadEvent.emit(YtDownloaderWrapper.EventNames.START, link)
 
-        const ytDlpProcess = spawn('yt-dlp', [link, '-P', path, '-o', `${filename}`, '-f', format]);
+        let ytDlpProcess:  ChildProcessWithoutNullStreams
+        if (format == 'mp4') {
+             ytDlpProcess = spawn('yt-dlp', [link, '-P', path, '-o', `${filename}`, '-f', format]);
+        } else {
+             ytDlpProcess = spawn('yt-dlp', [link, '-P', path, '-o', `${filename}`, '-x', '--audio-format', 'mp3']);
+        }
 
         ytDlpProcess.stdout.on('data', (data) => {
                 let outputLines = data.toString().split(/\r|\n/g).filter(Boolean);
@@ -83,7 +91,12 @@ export class YtDownloaderWrapper {
         });
 
         ytDlpProcess.on('close', (code) => {
-            YtDownloaderWrapper.DownloadEvent.emit(YtDownloaderWrapper.EventNames.DONE, {code: code, id: id, pid: ytDlpProcess.pid, pathWithFilename: path + filename})
+            YtDownloaderWrapper.DownloadEvent.emit(YtDownloaderWrapper.EventNames.DONE, {
+                code: code,
+                id: id,
+                pid: ytDlpProcess.pid,
+                pathWithFilename: path + filename
+            })
         });
     }
 
