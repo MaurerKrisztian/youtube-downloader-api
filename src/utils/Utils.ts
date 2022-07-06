@@ -1,17 +1,6 @@
 export class Utils {
 
-    static formatMessage(username: string, text: string): IMessage {
-        return {
-            username: username,
-            text: text,
-            time: new Date()
-        }
+    static getFilename(id: string, format = 'mp4'){
+        return `${id}/${id}.mp4`
     }
-
-}
-
-export interface IMessage {
-    username: string,
-    text: string,
-    time: Date;
 }

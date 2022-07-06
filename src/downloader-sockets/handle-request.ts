@@ -1,6 +1,7 @@
 import {Socket} from "socket.io";
 import {YtDownloaderWrapper} from "../cli-wrapper/yt-downloader-wrapper";
 import {DownloadService} from "../cli-wrapper/download.service";
+import {Utils} from "../utils/Utils";
 
 export class HandleRequest {
     static newDownloadRequest(socket: Socket) {
@@ -17,7 +18,7 @@ export class HandleRequest {
             })
             YtDownloaderWrapper.DownloadEvent.on(YtDownloaderWrapper.EventNames.DONE, (data) => {
                 console.log("done", data)
-                socket.emit('download-done', {link: `https://test.mytaskplan.me/${data.id}/${data.id}`, pid: data.pid} ) // todo from env
+                socket.emit('download-done', {link: `https://test.mytaskplan.me/${Utils.getFilename(data.id)}`, pid: data.pid} ) // todo from env
             })
             YtDownloaderWrapper.DownloadEvent.on(YtDownloaderWrapper.EventNames.ERROR, (data) => {
                 console.log("error", data)

@@ -4,9 +4,6 @@ import {getLogger, Logger} from "log4js";
 export class MyLogger {
     static logger: Logger = getLogger();
 
-    constructor() {
-    }
-
     // level: trace
     static trace(message: string) {
         this.logger.trace(message);

@@ -1,15 +1,18 @@
 import {YtDownloaderWrapper} from "./yt-downloader-wrapper";
 import { v4 as uuidv4 } from 'uuid';
 import {exec} from "child_process";
+import {Utils} from "../utils/Utils";
 
 export class DownloadService {
+    static readonly REMOVE_FILE_MS = 300_000
+
     static async download(body: { videoUrl: string }) {
         const ytDownloaderWrapper = new YtDownloaderWrapper()
         const id = uuidv4();
 
         console.log('download video ' + body.videoUrl);
 
-        ytDownloaderWrapper.process(body.videoUrl, id,`static/${id}/`, id, 'mp4');
+        ytDownloaderWrapper.process(body.videoUrl, Utils.getFilename(id,'mp4'),`static/${id}/`, id, 'mp4');
 
 
         setTimeout(async () => {
@@ -18,14 +21,10 @@ export class DownloadService {
             const res = await DownloadService.runInCommandLine(
                 `rm -rf static/${id}`,
             );
-        }, 300_000)
+        }, this.REMOVE_FILE_MS)
 
         console.log("done")
-        return {
-            baseUrl: `https://test.mytaskplan.me/`, // todo from env
-            crop: `/download/${id}/${id}-clip.mp4`,
-            download: `/download/${id}/${id}.mp4`,
-        };
+        return id;
     }
 
     static runInCommandLine(command: string) {
