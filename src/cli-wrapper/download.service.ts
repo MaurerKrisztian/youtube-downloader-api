@@ -6,13 +6,14 @@ import {Utils} from "../utils/Utils";
 export class DownloadService {
     static readonly REMOVE_FILE_MS = 300_000
 
-    static async download(body: { videoUrl: string }) {
+    static async download(body: { videoUrl: string, format: 'mp4' | 'mp3' }) {
         const ytDownloaderWrapper = new YtDownloaderWrapper()
         const id = uuidv4();
 
         console.log('download video ' + body.videoUrl);
 
-        ytDownloaderWrapper.process(body.videoUrl, Utils.getFilename(id,'mp4'),`static/${id}/`, id, 'mp4');
+        const fileFormat = body.format || 'mp4'
+        ytDownloaderWrapper.process(body.videoUrl, Utils.getFilename(id,fileFormat),`static/${id}/`, id, fileFormat);
 
 
         setTimeout(async () => {

@@ -59,7 +59,7 @@ export class YtDownloaderWrapper {
         return progressObject
     }
 
-    process(link: string, id:string, path: string='./download', filename:string = "video", format: 'mp4' = 'mp4') {
+    process(link: string, id:string, path: string='./download', filename:string = "video", format: 'mp4' | 'mp3' = 'mp4') {
         YtDownloaderWrapper.DownloadEvent.emit(YtDownloaderWrapper.EventNames.START, link)
 
         const ytDlpProcess = spawn('yt-dlp', [link, '-P', path, '-o', `${filename}`, '-f', format]);
