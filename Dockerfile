@@ -28,7 +28,7 @@ RUN npm --version
 RUN apt install software-properties-common -y
 RUN add-apt-repository ppa:deadsnakes/ppa -y
 RUN apt update -y
-RUN apt install python3 -y
+RUN apt install python3.7 -y
 
 #install pip3
 RUN apt-get -y install python3-pip -y
