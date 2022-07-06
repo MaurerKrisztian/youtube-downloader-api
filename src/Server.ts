@@ -28,7 +28,7 @@ export class Server {
 
         app.use(bodyParser.json());
         app.use(express.static(path.join(__dirname, 'public')));
-        app.use('/static', express.static(path.join(__dirname, '/../static'), { }));
+        app.use(express.static(path.join(__dirname, '/../static')));
         this.setupRouters(app);
         SocketService.setup();
 

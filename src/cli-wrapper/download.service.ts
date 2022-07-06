@@ -6,7 +6,7 @@ import {Utils} from "../utils/Utils";
 export class DownloadService {
     static readonly REMOVE_FILE_MS = 300_000
 
-    static async download(body: { videoUrl: string, format: 'mp4' | 'mp3' }) {
+    static async download(body: { videoUrl: string, format: 'mp4'  | 'webm' }) {
         const ytDownloaderWrapper = new YtDownloaderWrapper()
         const id = uuidv4();
 
