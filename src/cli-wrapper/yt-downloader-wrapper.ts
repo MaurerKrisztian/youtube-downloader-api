@@ -83,7 +83,7 @@ export class YtDownloaderWrapper {
         });
 
         ytDlpProcess.on('close', (code) => {
-            YtDownloaderWrapper.DownloadEvent.emit(YtDownloaderWrapper.EventNames.DONE, {code: code, id: id, pid: ytDlpProcess.pid})
+            YtDownloaderWrapper.DownloadEvent.emit(YtDownloaderWrapper.EventNames.DONE, {code: code, id: id, pid: ytDlpProcess.pid, pathWithFilename: path + filename})
         });
     }
 

@@ -13,7 +13,7 @@ export class DownloadService {
         console.log('download video ' + body.videoUrl);
 
         const fileFormat = body.format || 'mp4'
-        ytDownloaderWrapper.process(body.videoUrl, Utils.getFilename(id,fileFormat),`static/${id}/`, id, fileFormat);
+        ytDownloaderWrapper.process(body.videoUrl, id,`static/${id}/`,`${id}.${fileFormat}`, fileFormat);
 
 
         setTimeout(async () => {
