@@ -11,7 +11,7 @@ const server = Server.createApp();
 export const BIN_PATH = path.join(__dirname, 'dw-bin')
 
 console.log(BIN_PATH)
-const PORT = 3088;
+const PORT = process.env.PORT || 3088;
 server.listen(PORT, () => {
     MyLogger.debug("App listening on port " + PORT);
 });
