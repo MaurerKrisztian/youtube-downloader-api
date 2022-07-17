@@ -29,7 +29,6 @@
     "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.52",
     "typescript": "^3.9.10",
-    "uuid": "^8.3.2",
-    "yt-dlp-wrap": "^2.3.11"
+    "uuid": "^8.3.2"
   }
 }

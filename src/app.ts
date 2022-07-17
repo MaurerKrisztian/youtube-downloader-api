@@ -8,14 +8,14 @@ MyLogger.logger.level = "trace"
 const server = Server.createApp();
 
 
-export const BIN_PATH = path.join(__dirname, 'railway-pls')
-console.log("bin-path", BIN_PATH)
-async function getYtDlpBin() {
-    const YTDlpWrap = require('yt-dlp-wrap').default;
-    await YTDlpWrap.downloadFromGithub(BIN_PATH);
-}
+// export const BIN_PATH = path.join(__dirname, 'railway-pls')
+// console.log("bin-path", BIN_PATH)
+// async function getYtDlpBin() {
+//     const YTDlpWrap = require('yt-dlp-wrap').default;
+//     await YTDlpWrap.downloadFromGithub(BIN_PATH);
+// }
 
-getYtDlpBin().catch(err => console.log(err))
+// getYtDlpBin().catch(err => console.log(err))
 
 const PORT = 3088;
 server.listen(PORT, () => {
