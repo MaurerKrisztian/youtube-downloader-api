@@ -62,7 +62,7 @@ export class YtDownloaderWrapper {
         return progressObject
     }
 
-    process(BIN_PATH: string = 'pls', link: string, id: string, path: string = './download', filename: string = "video", format: 'mp4' | 'mp3' = 'mp4') {
+    process(BIN_PATH: string = 'yt-dlp', link: string, id: string, path: string = './download', filename: string = "video", format: 'mp4' | 'mp3' = 'mp4') {
         YtDownloaderWrapper.DownloadEvent.emit(YtDownloaderWrapper.EventNames.START, link)
 
         let ytDlpProcess:  ChildProcessWithoutNullStreams
