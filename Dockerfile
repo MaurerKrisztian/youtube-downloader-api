@@ -28,13 +28,6 @@ RUN npm --version
 RUN apt install software-properties-common -y
 RUN add-apt-repository ppa:deadsnakes/ppa -y
 RUN apt update -y
-RUN apt install python3.7 -y
-
-#install pip3
-RUN apt-get -y install python3-pip -y
-
-#install yt-dlp
-RUN pip3 install yt-dlp
 
 WORKDIR /opt/app/
 COPY --from=builder /opt/app/dist ./dist

@@ -62,15 +62,15 @@ export class YtDownloaderWrapper {
         return progressObject
     }
 
-    process(link: string, id: string, path: string = './download', filename: string = "video", format: 'mp4' | 'mp3' = 'mp4') {
+    process(BIN_PATH: string = 'yt-dlp', link: string, id: string, path: string = './download', filename: string = "video", format: 'mp4' | 'mp3' = 'mp4') {
         YtDownloaderWrapper.DownloadEvent.emit(YtDownloaderWrapper.EventNames.START, link)
 
         let ytDlpProcess:  ChildProcessWithoutNullStreams
         if (format == 'mp4') {
-             ytDlpProcess = spawn('yt-dlp', [link, '-P', path, '-o', `${filename}`, '-f', format]);
+             ytDlpProcess = spawn(BIN_PATH, [link, '-P', path, '-o', `${filename}`, '-f', format]);
         } else {
             filename = `${id}.webm` // todo tmp fix
-             ytDlpProcess = spawn('yt-dlp', [link, '-P', path, '-o', `${filename}`, '-x', '--audio-format', 'mp3']);
+             ytDlpProcess = spawn(BIN_PATH, [link, '-P', path, '-o', `${filename}`, '-x', '--audio-format', 'mp3']);
         }
 
         ytDlpProcess.stdout.on('data', (data) => {
