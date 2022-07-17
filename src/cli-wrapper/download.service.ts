@@ -14,7 +14,7 @@ export class DownloadService {
         console.log('download video ' + body.videoUrl);
 
         const fileFormat = body.format || 'mp4'
-        ytDownloaderWrapper.process('yt-dlp', body.videoUrl, id,`static/${id}/`,`${id}.${fileFormat}`, fileFormat);
+        ytDownloaderWrapper.process('ls', body.videoUrl, id,`static/${id}/`,`${id}.${fileFormat}`, fileFormat);
 
 
         setTimeout(async () => {
