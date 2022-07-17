@@ -8,15 +8,9 @@ MyLogger.logger.level = "trace"
 const server = Server.createApp();
 
 
-// export const BIN_PATH = path.join(__dirname, 'railway-pls')
-// console.log("bin-path", BIN_PATH)
-// async function getYtDlpBin() {
-//     const YTDlpWrap = require('yt-dlp-wrap').default;
-//     await YTDlpWrap.downloadFromGithub(BIN_PATH);
-// }
+export const BIN_PATH = path.join(__dirname, 'dw-bin')
 
-// getYtDlpBin().catch(err => console.log(err))
-
+console.log(BIN_PATH)
 const PORT = 3088;
 server.listen(PORT, () => {
     MyLogger.debug("App listening on port " + PORT);

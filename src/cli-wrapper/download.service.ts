@@ -2,7 +2,7 @@ import {YtDownloaderWrapper} from "./yt-downloader-wrapper";
 import { v4 as uuidv4 } from 'uuid';
 import {exec} from "child_process";
 import {Utils} from "../utils/Utils";
-// import {BIN_PATH} from "../app";
+import {BIN_PATH} from "../app";
 
 export class DownloadService {
     static readonly REMOVE_FILE_MS = 300_000
@@ -14,7 +14,7 @@ export class DownloadService {
         console.log('download video ' + body.videoUrl);
 
         const fileFormat = body.format || 'mp4'
-        ytDownloaderWrapper.process('ls', body.videoUrl, id,`static/${id}/`,`${id}.${fileFormat}`, fileFormat);
+        ytDownloaderWrapper.process(BIN_PATH, body.videoUrl, id,`static/${id}/`,`${id}.${fileFormat}`, fileFormat);
 
 
         setTimeout(async () => {
