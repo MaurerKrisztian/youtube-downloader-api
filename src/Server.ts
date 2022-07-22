@@ -1,6 +1,6 @@
 import express, {Express} from "express";
 import bodyParser from "body-parser";
-import {SocketService} from "./services/socketServices/SocketService";
+import {SocketService} from "./services/SocketService";
 
 const socketio = require('socket.io');
 const path = require('path');
