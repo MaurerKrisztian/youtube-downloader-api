@@ -1,5 +1,7 @@
 #  Youtube downloader api
 
+Blog post: https://dev.to/maurerkrisztian/youtube-downloader-cli-wrapper-2h61
+
 Setup:
 
 create a .env file:
