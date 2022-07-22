@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node ./src/app.ts",
     "build-start": "tsc -p . && node ./build/app.js",
-    "build": "tsc -p . && cp src/bin/yt-dlp-linux-bin ./dist/yt-dlp-linux-bin",
+    "build": "tsc -p . && mkdir -p ./dist/bin/ && cp src/bin/yt-dlp-linux-bin ./dist/bin/yt-dlp-linux-bin",
     "start-dev": "ts-node-dev ./src/app.ts",
     "test": "jest --silent --verbose --coverage"
   },
